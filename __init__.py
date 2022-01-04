@@ -1,4 +1,4 @@
-#on importe le module chess pour avoir accès aux fonctionnalités d'un moteur de jeux d'échecs
+#on importe le module chess pour avoir accès aux fonctionnalités de base du jeu d'échecs
 import chess
 
 #représentation de l'échiquier
