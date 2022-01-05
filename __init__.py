@@ -1,5 +1,6 @@
 #on importe le module chess pour avoir accès aux fonctionnalités de base du jeu d'échecs
 import chess
+import chess.polyglot
 
 #-----------représentation de l'échiquier
 board=chess.Board()
