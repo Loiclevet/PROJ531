@@ -53,3 +53,4 @@ def evaluation(board):
   return blackScore+whiteScore
 #si le résultat obtenu est>0 alors les blancs ont l'avantage et si il est<0 alors les noirs ont l'avantage
 
+
