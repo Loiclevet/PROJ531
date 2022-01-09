@@ -103,3 +103,59 @@ def minimaxi(board, depth, maximizingPlayer):
                 
     return v, bestMove
 
+'''
+La fonction alphaBeta() est une sorte d'amélioration de la fonction minimaxi() car elle passe par moins de "branches" que minimaxi().
+méthode utilisée : https://fr.wikipedia.org/wiki/%C3%89lagage_alpha-b%C3%AAta#Pseudocode
+'''
+def alphaBeta(board, depth, alpha, beta):
+    possibleMoves = board.legal_moves
+    bestMove = None
+
+    if depth == 0:
+        return evaluation(board),bestMove
+
+    if (not board.turn):
+        v = 0
+        for move in possibleMoves:
+            deplacement = chess.Move.from_uci(str(move))
+            
+            #fait le déplacement et met à jour l'échiquier
+            board.push(deplacement)
+            v2, current_move = alphaBeta(board, depth-1, alpha, beta)
+            #annule le dernier déplacement
+            board.pop()
+
+            if(v2 < v or not bestMove):
+                v = v2
+                bestMove = move
+
+            if(v <= beta):
+                return beta, bestMove
+
+            if(v < alpha):
+                alpha = v
+
+        return alpha, bestMove
+        
+    else:
+        v = 0
+        for move in possibleMoves:
+            deplacement = chess.Move.from_uci(str(move))
+            
+            #fait le déplacement et met à jour l'échiquier
+            board.push(deplacement)
+            v2,current_move = alphaBeta(board, depth-1, alpha, beta)
+            #annule le dernier déplacement
+            board.pop()
+
+            if(v2 < v or not bestMove):
+                v = v2
+                bestMove = move
+
+            if(v >= alpha):
+                return alpha, bestMove
+
+            if(v > beta):
+                beta = v
+            
+        return beta, bestMove
