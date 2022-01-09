@@ -39,7 +39,7 @@ méthode utilisée : 10*valeur de la pièce+nombre de déplacements possibles de
 def evaluation(board):
   blackScore = 0  
   whiteScore = 0
-  #on parcoure tout le plateau(il y a 64 cases et la première case est d'indice 0)
+  #on parcourt tout le plateau(il y a 64 cases et la première case est d'indice 0)
   for i in range(0,64):
     moves=0
     #pour chaque case, on définit le nb de coups légaux possibles
