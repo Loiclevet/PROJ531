@@ -159,3 +159,5 @@ def alphaBeta(board, depth, alpha, beta):
                 beta = v
             
         return beta, bestMove
+
+ 
