@@ -7,7 +7,7 @@ D'abord, on crée une fonction pieceValue() pour donner des valeurs aux pièces 
 def pieceValue(piece):
   if piece == None:
     return 0
-  #pour une meilleure utilisation, on donne des valeurs négatives aux pions noirs(représentés par des minuscules) et positives aux pions blancs
+  #pour une utilisation plus facile, on donne des valeurs négatives aux pions noirs(représentés par des minuscules) et positives aux pions blancs
   elif piece == 'P':
     return 1
   elif piece == 'N':
@@ -34,41 +34,72 @@ def pieceValue(piece):
     return -500
 
 '''
-La fonction evaluation() sert à donner une note au plateau, càd en déduire l'équipe qui a l'avantage, elle nous sera utile pour définir les méthodes minmax() et alphabeta()
+La fonction evaluation() sert à donner une note au plateau, càd définir l'équipe qui a l'avantage, elle nous sera utile pour définir les méthodes minmax() et alphabeta()
 méthode utilisée : 10*valeur de la pièce+nombre de déplacements possibles de la pièce(https://www.youtube.com/watch?v=gXywCc_KIMM)
 '''
 def evaluation(board):
   blackScore = 0  
   whiteScore = 0
+  
   #on parcourt tout le plateau(il y a 64 cases et la première case est d'indice 0)
   for i in range(0,64):
     moves=0
-    #pour chaque case, on définit le nb de coups légaux possibles
+    #pour chaque case, on détermine le nb de coups légaux possibles
     for move in board.legal_moves:
         moves+=1
+    
     #pour éviter d'avoir une erreur "< ou > est un opérateur non supporté entre NoneType et int", on rajoute la condition "pieceValue(str(board.piece_at(i)))!=None"
     if pieceValue(str(board.piece_at(i)))!=None and pieceValue(str(board.piece_at(i)))<0:
       blackScore += 10*pieceValue(str(board.piece_at(i)))-moves
     if pieceValue(str(board.piece_at(i)))!=None and pieceValue(str(board.piece_at(i)))>0:
       whiteScore += 10*pieceValue(str(board.piece_at(i)))+moves
+     
   return blackScore+whiteScore
-#si le résultat obtenu est>0 alors les blancs ont l'avantage et si il est<0 alors les noirs ont l'avantage
+#si le résultat obtenu est >0 alors les blancs ont l'avantage, si =0 personne n'a l'avantage, si <0 alors les noirs ont l'avantage
 
 '''
 La fonction minimaxi() va tester toutes les possibilités d'une profondeur donnée, cette méthode va nous aider à définir le meilleur coup possible.
+En effet, elle renvoie un tuple composé de l'évaluation du plateau et du meilleur coup à jouer.
 méthode utilisée : https://fr.wikipedia.org/wiki/Algorithme_minimax#Pseudocode
 '''
 def minimaxi(board, depth, maximizingPlayer):
-  if depth == 0 :
-    return evaluation(board)
-  possibleMoves = board.legal_moves
-  if maximizingPlayer:
-    v = -(math.inf)
-    for move in possibleMoves:
-      v = max(v,minimaxi(board, depth-1, False))
-  else:
-    v = math.inf
-    for move in possibleMoves:
-      v = min(v,minimaxi(board, depth-1, True))
-  return v
+    possibleMoves = board.legal_moves
+    bestMove = None
+    
+    if depth == 0 :
+        return evaluation(board), bestMove
+    
+    if maximizingPlayer:
+        v = -math.inf
+        for move in possibleMoves:
+            
+            deplacement = chess.Move.from_uci(str(move))
+            
+            #fait le déplacement et met à jour l'échiquier
+            board.push(deplacement)
+            v2, current_move = minimaxi(board, depth-1, False)
+            #annule le dernier déplacement
+            board.pop()
+            
+            if(v2 > v or not bestMove):
+                v = v2
+                bestMove = move
+                
+    else:
+        v = math.inf
+        for move in possibleMoves:
+            
+            deplacement = chess.Move.from_uci(str(move))
+            
+            #fait le déplacement et met à jour l'échiquier
+            board.push(deplacement)
+            v2,current_move = minimaxi(board, depth-1, True)
+            #annule le dernier déplacement
+            board.pop()
+            
+            if(v2 < v or not bestMove):
+                v = v2
+                bestMove = move
+                
+    return v, bestMove
 
