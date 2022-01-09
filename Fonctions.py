@@ -1,7 +1,8 @@
 import chess
+import math
 
 '''
-D'abord, on crée une fonction pieceValue() car on en a besoin pour définir la fonction evaluation()
+D'abord, on crée une fonction pieceValue() pour donner des valeurs aux pièces car on en a besoin pour définir la fonction evaluation()
 '''
 def pieceValue(piece):
   if piece == None:
@@ -53,4 +54,21 @@ def evaluation(board):
   return blackScore+whiteScore
 #si le résultat obtenu est>0 alors les blancs ont l'avantage et si il est<0 alors les noirs ont l'avantage
 
+'''
+La fonction minimaxi() va tester toutes les possibilités d'une profondeur donnée, cette méthode va nous aider à définir le meilleur coup possible.
+méthode utilisée : https://fr.wikipedia.org/wiki/Algorithme_minimax#Pseudocode
+'''
+def minimaxi(board, depth, maximizingPlayer):
+  if depth == 0 :
+    return evaluation(board)
+  possibleMoves = board.legal_moves
+  if maximizingPlayer:
+    v = -(math.inf)
+    for move in possibleMoves:
+      v = max(v,minimaxi(board, depth-1, False))
+  else:
+    v = math.inf
+    for move in possibleMoves:
+      v = min(v,minimaxi(board, depth-1, True))
+  return v
 
