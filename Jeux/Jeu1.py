@@ -1,6 +1,7 @@
 import chess
+import math
 import chess.polyglot
-import chess.pgn
+import chess.pgn as pgn
 import Fonctions as fct
 import Ouvertures as o
 
@@ -37,7 +38,7 @@ while not(board.is_game_over()):
         board.push_uci(bouger)
         print(board, '\n')
         
-      else:
+   else:
         moves = board.legal_moves
         for move in moves :
             for deplacement in o.polyOuverture(board):
@@ -57,16 +58,16 @@ while not(board.is_game_over()):
         board.push_uci(bouger)
         print(board, '\n')
         
-      tour += 1
+    tour += 1
       
-      # condition partie terminée
-      if (board.is_game_over()):
+    # condition partie terminée
+    if (board.is_game_over()):
         print("The game is over")
         print(board.result())
         
-      # sauvegarde au format pgn
-      new_pgn = open(nom_sauv,'w')
-      export = pgn.FileExporter(new_pgn)
-      game.accept(export)
+    # sauvegarde au format pgn
+    new_pgn = open(nom_sauv,'w')
+    export = pgn.FileExporter(new_pgn)
+    game.accept(export)
         
         
