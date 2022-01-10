@@ -13,7 +13,12 @@ tour = 0
 profondeur = 3
 
 #donner un nom pour la sauvegarde
-nom_sauv = str(input('Quel est ton jolie petit nom? '))
+nom_sauv = str(input('Comment voulez-vous nommer cette magnifique partie? '))
+
+#pseudo des 2 joueurs
+player_1 = str(input('Entrez votre pseudo Joueur 1 : '))
+player_2 = str(input('Entrez votre pseudo Joueur 2 : '))
+
 game = pgn.Game()
 
 while not(board.is_game_over()):
@@ -28,17 +33,17 @@ while not(board.is_game_over()):
         if cap:
             fct.alphaBeta(board, profondeur, -math.inf, math.inf)
         
-        position_initiale = input("Quelle pièce voulez-vous déplacer Joueur 1? ")
-        position_finale = input("Jusqu'à où BG1? ")
+        position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_1} ?")
+        position_finale = input("Jusqu'à où BG1 ? ")
         while chess.Move.from_uci(position_initiale + position_finale) not in board.legal_moves:
-          print("Non pas comme ça BG1")
-          position_initiale = input("Quelle pièce voulez-vous déplacer Joueur 1? ")
-          position_finale = input("Jusqu'à où BG1? ")
+          print("MOUVEMENT IMPOSSIBLE!")
+          position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_1} ?")
+          position_finale = input("Jusqu'à où BG1 ? ")
         bouger = position_initiale+position_finale
         board.push_uci(bouger)
         print(board, '\n')
         
-   else:
+    else:
         moves = board.legal_moves
         for move in moves :
             for deplacement in o.polyOuverture(board):
@@ -48,12 +53,12 @@ while not(board.is_game_over()):
         if cap:
             fct.alphaBeta(board, profondeur, -math.inf, math.inf)
         
-        position_initiale = input("Quelle pièce voulez-vous déplacer Joueur 2? ")
-        position_finale = input("Jusqu'à où BG2? ")
+        position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_2} ?")
+        position_finale = input("Jusqu'à où BG2 ? ")
         while chess.Move.from_uci(position_initiale+position_finale) not in board.legal_moves:
-          print("Non pas comme ça BG2")
-          position_initiale = input("Quelle pièce voulez-vous déplacer Joueur 2? ")
-          position_finale = input("Jusqu'à où BG2? ")
+          print("MOUVEMENT IMPOSSIBLE!")
+          position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_2} ?")
+          position_finale = input("Jusqu'à où BG2 ? ")
         bouger = position_initiale+position_finale
         board.push_uci(bouger)
         print(board, '\n')
