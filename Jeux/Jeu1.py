@@ -15,12 +15,14 @@ tour = 0
 profondeur = 3
 
 #donner un nom pour la sauvegarde
-nom_sauv = str(input('Comment voulez-vous nommer cette magnifique partie? '))
+nom_sauv = str(input('Comment voulez-vous nommer cette magnifique partie ? '))
 
 #pseudo des 2 joueurs
 player_1 = str(input('Entrez votre pseudo Joueur 1 : '))
 player_2 = str(input('Entrez votre pseudo Joueur 2 : '))
 
+print('\n')
+print("--------START--------\n")
 game = pgn.Game()
 
 while not(board.is_game_over()):
@@ -31,16 +33,16 @@ while not(board.is_game_over()):
             for deplacement in o.polyOuverture(board):
                 if move == deplacement[0]:
                     cap = False
-                    print(deplacement[0],deplacement[1])
+                    print(f"coup conseillé: {deplacement[0]}, poids: {deplacement[1]}")
         if cap:
             best_coup = fct.alphaBeta(board, profondeur, -math.inf, math.inf)
-            print(f"Le meilleur coup possible est {best_coup[1]} ?")
+            print(f"Le meilleur coup possible est {best_coup[1]} ")
         
-        position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_1} ?")
+        position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_1} ? ")
         position_finale = input("Jusqu'à où BG1 ? ")
         while chess.Move.from_uci(position_initiale + position_finale) not in board.legal_moves:
           print("MOUVEMENT IMPOSSIBLE!")
-          position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_1} ?")
+          position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_1} ? ")
           position_finale = input("Jusqu'à où BG1 ? ")
         bouger = position_initiale+position_finale
         board.push_uci(bouger)
@@ -52,16 +54,16 @@ while not(board.is_game_over()):
             for deplacement in o.polyOuverture(board):
                 if move == deplacement[0]:
                     cap = False
-                    print(deplacement[0],deplacement[1])
+                    print(f"coup conseillé: {deplacement[0]}, poids: {deplacement[1]}")
         if cap:
             best_coup = fct.alphaBeta(board, profondeur, -math.inf, math.inf)
-            print(f"Le meilleur coup possible est {best_coup[1]} ?")
+            print(f"Le meilleur coup possible est {best_coup[1]} ")
         
-        position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_2} ?")
+        position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_2} ? ")
         position_finale = input("Jusqu'à où BG2 ? ")
         while chess.Move.from_uci(position_initiale+position_finale) not in board.legal_moves:
           print("MOUVEMENT IMPOSSIBLE!")
-          position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_2} ?")
+          position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_2} ? ")
           position_finale = input("Jusqu'à où BG2 ? ")
         bouger = position_initiale+position_finale
         board.push_uci(bouger)
