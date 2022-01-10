@@ -10,6 +10,8 @@ print('---BIENVENUE DANS LE MEILLEUR POLYCHESS---\n')
 print(board, '\n')
 #variable permettant de déterminer à qui le tour
 tour = 0
+
+#on fixe la profondeur à 3 pour que l'éxecution de la fonction alphaBeta ne soit pas trop longue
 profondeur = 3
 
 #donner un nom pour la sauvegarde
