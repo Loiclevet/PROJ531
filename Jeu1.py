@@ -35,7 +35,8 @@ while not(board.is_game_over()):
                     cap = False
                     print(f"coup conseillé: {deplacement[0]}, poids: {deplacement[1]}")
         if cap:
-            fct.alphaBeta(board, profondeur, -math.inf, math.inf)
+            best_bouge = fct.alphaBeta(board, profondeur, -math.inf, math.inf)
+            print(f"Le coup le moins risqué est {best_bouge[1]}")
         
         position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_1} ? ")
         position_finale = input("Jusqu'à où BG1 ? ")
@@ -55,7 +56,8 @@ while not(board.is_game_over()):
                     cap = False
                     print(f"coup conseillé: {deplacement[0]}, poids: {deplacement[1]}")
         if cap:
-            fct.alphaBeta(board, profondeur, -math.inf, math.inf)
+            best_bouge = fct.alphaBeta(board, profondeur, -math.inf, math.inf)
+            print(f"Le coup le moins risqué est {best_bouge[1]}")
         
         position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_2} ? ")
         position_finale = input("Jusqu'à où BG2 ? ")
