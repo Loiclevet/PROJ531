@@ -7,4 +7,9 @@ Ce dépot a pour but de créer un jeu d'échec. Le programme permet de jouer aux
 
 # Utilisation
 
+Pour jouer à notre jeu, il faut installer tout notre programme puis il y a 2 possibilités:
+* si vous voulez jouez contre un autre joueur, ouvrez le fichier Jeu1.py avec un compilateur python
+* si vous voulez jouez contre l'IA, ouvrez le fichier Jeu2.py avec un compilateur python
+Maintenant c'est parti!
+
 # Installation
