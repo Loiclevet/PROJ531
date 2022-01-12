@@ -17,8 +17,8 @@ profondeur = 3
 #donner un nom pour la sauvegarde
 nom_sauv = str(input('Comment voulez-vous nommer cette magnifique partie ? '))
 
-#pseudo des 2 joueurs
-player_1 = str(input('Entrez votre pseudo Joueur 1 : '))
+#pseudo du joueur
+player_1 = str(input('Entrez votre pseudo Joueur : '))
 
 print('\n')
 print("--------START--------\n")
@@ -38,11 +38,11 @@ while not(board.is_game_over()):
             print(f"Le coup le moins risqué est {best_bouge[1]}")
         
         position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_1} ? ")
-        position_finale = input("Jusqu'à où BG1 ? ")
+        position_finale = input("Jusqu'à où BG ? ")
         while chess.Move.from_uci(position_initiale + position_finale) not in board.legal_moves:
           print("MOUVEMENT IMPOSSIBLE!")
           position_initiale = input(f"Quelle pièce voulez-vous déplacer {player_1} ? ")
-          position_finale = input("Jusqu'à où BG1 ? ")
+          position_finale = input("Jusqu'à où BG ? ")
         bouger = position_initiale+position_finale
         board.push_uci(bouger)
         print(board, '\n')
