@@ -6,7 +6,7 @@ import Fonctions as fct
 import Ouvertures as o
 
 board = chess.Board()
-print('---BIENVENUE DANS POLYCHESS J VS IA---\n')
+print('---BIENVENUE DANS POLYCHESS IA VS IA---\n')
 print(board, '\n')
 #variable permettant de déterminer à qui le tour
 tour = 0
@@ -16,9 +16,6 @@ profondeur = 3
 
 #donner un nom pour la sauvegarde
 nom_sauv = str(input('Comment voulez-vous nommer cette magnifique partie ? '))
-
-#pseudo des 2 joueurs
-player_1 = str(input('Entrez votre pseudo Joueur 1 : '))
 
 print('\n')
 print("--------START--------\n")
