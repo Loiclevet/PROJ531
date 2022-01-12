@@ -6,7 +6,7 @@ import Fonctions as fct
 import Ouvertures as o
 
 board = chess.Board()
-print('---BIENVENUE DANS LE MEILLEUR POLYCHESS---\n')
+print('---BIENVENUE DANS POLYCHESS J VS IA---\n')
 print(board, '\n')
 #variable permettant de déterminer à qui le tour
 tour = 0
@@ -59,10 +59,21 @@ while not(board.is_game_over()):
                     cap = False
                     
         if cap:
-            mouvement = fct.alphaBeta(board, profondeur, -math.inf, math.inf)
-        board.push_uci(mouvement)
-        print(board, '\n')
-        
+            mouvement = fct.alphaBeta(board, profondeur, -math.inf, math.inf)[1]
+            
+        valide = False
+        while not valide:
+            
+            try:
+                board.push(chess.Move.from_uci(str(mouvement)))
+                print(board, '\n')
+                valide = True
+                
+            except (ValueError):
+                print('try again')
+            except (TypeError):
+                print('try again')
+                    
     tour += 1
       
     # condition partie terminée
