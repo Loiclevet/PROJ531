@@ -6,7 +6,7 @@ import Fonctions as fct
 import Ouvertures as o
 
 board = chess.Board()
-print('---BIENVENUE DANS LE MEILLEUR POLYCHESS---\n')
+print('---BIENVENUE DANS POLYCHESS J VS J---\n')
 print(board, '\n')
 #variable permettant de déterminer à qui le tour
 tour = 0
